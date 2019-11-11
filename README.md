@@ -1,10 +1,10 @@
 # play_pytorch
 Pytorch Trial with Paper, Kaggle, Computer Vision Applications
 
-# Install
+## Install
 
-# Getting Started
+## Getting Started
 
-# Papers Implemented 
+## Papers Implemented 
 
-# Library used
+## Library used
