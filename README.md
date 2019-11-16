@@ -1,11 +1,9 @@
 # play_pytorch
 Pytorch Trial with Paper, Kaggle, Computer Vision Applications
 
-## Install
-
 ## Getting Started
 
-## Papers Implemented 
+## Demo
 
 ## Library used
 - [Pytorch Demo Application] (https://github.com/pytorch/android-demo-app)
