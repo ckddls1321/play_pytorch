@@ -10,16 +10,16 @@ import torchvision.transforms as transforms
 from torch.utils.data.distributed import DistributedSampler
 from utils import CIFAR10Policy
 
-def cifar10(data_root, batch_size=512,imgsize=32, **kwargs):
+def cifar10(batch_size=512,imgsize=32, **kwargs):
     tfms = ([*rand_pad(4, imgsize), flip_lr(p=0.5)],[])
-    workers = min(16, num_cpus())
-    dataset = ImageDataBunch.from_folder(data_root+'cifar-10/',valid='test',ds_tfms=tfms,bs=batch_size,num_worksers=workers).normalize(cifar_stats)
+    path = untar_data(URLs.CIFAR)
+    dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=tfms,bs=batch_size).normalize(cifar_stats)
     return dataset
 
-def cifar100(data_root, batch_size=512,imgsize=32, **kwargs):
+def cifar100(batch_size=512,imgsize=32, **kwargs):
     tfms = ([*rand_pad(4, imgsize), flip_lr(p=0.5)],[])
-    workers = min(16, num_cpus())
-    dataset = ImageDataBunch.from_folder(data_root+'cifar-100/',valid='test',ds_tfms=tfms,bs=batch_size,num_worksers=workers).normalize(cifar_stats)
+    path = untar_data(URLs.CIFAR_100)
+    dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=tfms,bs=batch_size).normalize(cifar_stats)
     return dataset
 
 def cifar10_pytorch(data_root, batch_size, imgsize=32, is_distributed=False):

@@ -165,3 +165,6 @@ dmypy.json
 .idea/modules.xml
 .idea/play_pytorch.iml
 .idea/vcs.xml
+
+# Work directory
+work_dirs
