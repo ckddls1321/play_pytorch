@@ -72,9 +72,12 @@ if __name__ == "__main__":
     try:
         dataset = getattr(data, cfg.dataset_type)
         dataset = dataset(batch_size=cfg.total_bs, imgsize=cfg.img_size)
+        dataset.show_batch(rows=3, figsize=(10,10))
+        plt.show()
     except:
-        print("Dataset Type {} are Not Implemented. ")
+        print("Dataset Type {} are Not Implemented. ".format(cfg.dataset_type))
         exit()
+
 
     metrics = [getattr(fastai.metrics, met) for met in cfg.metric]
     try:

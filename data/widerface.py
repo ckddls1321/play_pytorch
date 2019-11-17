@@ -39,8 +39,8 @@ def get_annotations_wider_txt(fname, prefix=None):
     return [id2images[k] for k in ids], [[id2bboxes[k], id2cats[k]] for k in ids]
 
 
-def widerface(data_root='', batch_size=32, imgsize=256, **kwargs):
-    wider_path = Path(data_root + 'widerface')
+def widerface(data_root=Path.home() / 'projects/DL/DB', batch_size=32, imgsize=256, **kwargs):
+    wider_path = data_root / 'widerface/'
     train_images, train_lbl_bbox = get_annotations_wider_txt(wider_path / 'wider_face_split/wider_face_train_bbx_gt.txt')
     val_images, val_lbl_bbox = get_annotations_wider_txt(wider_path / 'wider_face_split/wider_face_val_bbx_gt.txt')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox

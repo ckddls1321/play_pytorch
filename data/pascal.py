@@ -13,15 +13,15 @@ __all__ = ['pascal_2007', 'pascal_2012']
 
 pascal_stat = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
-def pascal_2007(batch_size=16, imgsize=256, **kwargs):
+def pascal_2007(batch_size=16, imgsize=300, **kwargs):
     path = untar_data(URLs.PASCAL_2007)
-    train_images, train_lbl_bbox = get_annotations(path / 'pascal_train2007.json')
-    val_images, val_lbl_bbox = get_annotations(path / 'pascal_val2007.json')
+    train_images, train_lbl_bbox = get_annotations(path / 'train.json')
+    val_images, val_lbl_bbox = get_annotations(path / 'valid.json')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox
     img2bbox = dict(zip(images, lbl_bbox))
     get_y_func = lambda o: img2bbox[o.name]
 
-    data = (ObjectItemList.from_folder(path / '2007' / 'train')
+    data = (ObjectItemList.from_folder(path / 'train')
             .split_by_files(val_images)
             .label_from_func(get_y_func)
             .transform(get_transforms(), tfm_y=True, size=imgsize)
@@ -29,15 +29,15 @@ def pascal_2007(batch_size=16, imgsize=256, **kwargs):
 
     return data
 
-def pascal_2012(batch_size=16, imgsize=256, **kwargs):
+def pascal_2012(batch_size=16, imgsize=300, **kwargs):
     path = untar_data(URLs.PASCAL_2012)
-    train_images, train_lbl_bbox = get_annotations(path / 'pascal_train2012.json')
-    val_images, val_lbl_bbox = get_annotations(path / 'pascal_val2012.json')
+    train_images, train_lbl_bbox = get_annotations(path / 'train.json')
+    val_images, val_lbl_bbox = get_annotations(path / 'valid.json')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox
     img2bbox = dict(zip(images, lbl_bbox))
     get_y_func = lambda o: img2bbox[o.name]
 
-    data = (ObjectItemList.from_folder(path)
+    data = (ObjectItemList.from_folder(path / 'train')
             .split_by_files(val_images)
             .label_from_func(get_y_func)
             .transform(get_transforms(), tfm_y=True, size=imgsize)
