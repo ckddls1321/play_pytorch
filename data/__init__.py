@@ -1,5 +1,5 @@
 from .cifar import *
-from .cinic import cinic10
+from .cinic import *
 from .pascal import *
 from .coco import *
 from .caltech import *
@@ -7,6 +7,6 @@ from .camvid import *
 from .cat_dog import *
 from .imagenet import *
 from .widerface import *
-from .fruits360 import *
+from .food import *
 from .oxford import *
 from .stanford import *
