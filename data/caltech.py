@@ -3,10 +3,11 @@ from fastai.vision import *
 from fastai.metrics import *
 
 def caltech101(data_root=Path.home() / 'projects/DL/DB',batch_size=512,imgsize=32, **kwargs):
-    path = url2path(URLs.CALTECH_101)
-    print(path)
     # path = untar_data(URLs.CALTECH_101)
-    dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=get_transforms(),bs=batch_size).normalize(imagenet_stats)
+    path = url2path(URLs.CALTECH_101)
+    # print(path)
+    path = path.parent.joinpath('101_ObjectCategories')
+    dataset = (ImageDataBunch.from_folder(path, valid_pct=0.2, ds_tfms=get_transforms(), size=imgsize).normalize(imagenet_stats))
     return dataset
 
 def CUB200_2011(batch_size=128,imgsize=224, **kwargs):
