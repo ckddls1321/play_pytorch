@@ -168,3 +168,4 @@ dmypy.json
 
 # Work directory
 work_dirs
+test.py

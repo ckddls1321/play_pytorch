@@ -88,6 +88,7 @@ if __name__ == "__main__":
 
     learner = Learner(dataset, model, opt_func=optimizer, loss_func=loss().to(device), metrics=metrics, bn_wd=False,
                       true_wd=True, wd=cfg.optimizer.weight_decay, path=cfg.work_dir)
+    # TODO: cnn_learner
 
     if args.local_rank > -1:
         learner.to_distributed(args.local_rank)

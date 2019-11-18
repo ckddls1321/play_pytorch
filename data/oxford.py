@@ -4,7 +4,8 @@ from fastai.vision import *
 from fastai.metrics import *
 
 def oxford_iiit_pet(batch_size,imgsize=224,**kwargs):
-    path = untar_data(URLs.PETS)
+    # path = untar_data(URLs.PETS)
+    path = url2path(URLs.PETS)
     pat = r'/([^/]+)_\d+.jpg$'
     fnames = get_image_files(path / 'images')
     dataset = ImageDataBunch.from_name_re(path, fnames, pat, ds_tfms=get_transforms(), size=224).normalize(imagenet_stats)
@@ -24,7 +25,8 @@ def get_annotations_from_txt(fname, prefix=None):
     return images, labels
 
 def oxford_102_flowers(batch_size,imgsize=224,**kwargs):
-    path = untar_data(URLs.FLOWERS)
+    # path = untar_data(URLs.FLOWERS)
+    path = url2path(URLs.FLOWERS)
     train_images, train_lbl = get_annotations_from_txt(path / 'train.txt')
     val_images, val_lbl = get_annotations_from_txt(path / 'valid.txt')
     test_images, test_lbl = get_annotations_from_txt(path / 'test.txt')

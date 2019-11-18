@@ -3,8 +3,8 @@ from fastai.vision import *
 from fastai.metrics import *
 
 def stanford_cars(batch_size=256,imgsize=224, **kwargs):
-    tfms = get_transforms()
-    path = untar_data(URLs.CARS)
-    dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=tfms,bs=batch_size).normalize(imagenet_stats)
+    # path = untar_data(URLs.CARS)
+    path = url2path(URLs.MNIST)
+    dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=get_transforms(),bs=batch_size).normalize(imagenet_stats)
     return dataset
 

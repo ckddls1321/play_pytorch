@@ -1,3 +1,4 @@
+from .mnist import *
 from .cifar import *
 from .cinic import *
 from .pascal import *

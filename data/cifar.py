@@ -12,13 +12,15 @@ from utils import CIFAR10Policy
 
 def cifar10(batch_size=512,imgsize=32, **kwargs):
     tfms = ([*rand_pad(4, imgsize), flip_lr(p=0.5)],[])
-    path = untar_data(URLs.CIFAR)
+    # path = untar_data(URLs.CIFAR)
+    path = url2path(URLs.CIFAR)
     dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=tfms,bs=batch_size).normalize(cifar_stats)
     return dataset
 
 def cifar100(batch_size=512,imgsize=32, **kwargs):
     tfms = ([*rand_pad(4, imgsize), flip_lr(p=0.5)],[])
-    path = untar_data(URLs.CIFAR_100)
+    # path = untar_data(URLs.CIFAR_100)
+    path = url2path(URLs.CIFAR_100)
     dataset = ImageDataBunch.from_folder(path,valid='test',ds_tfms=tfms,bs=batch_size).normalize(cifar_stats)
     return dataset
 

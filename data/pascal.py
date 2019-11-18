@@ -14,7 +14,8 @@ __all__ = ['pascal_2007', 'pascal_2012']
 pascal_stat = ([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
 
 def pascal_2007(batch_size=16, imgsize=300, **kwargs):
-    path = untar_data(URLs.PASCAL_2007)
+    # path = untar_data(URLs.PASCAL_2007)
+    path = url2path(URLs.PASCAL_2007)
     train_images, train_lbl_bbox = get_annotations(path / 'train.json')
     val_images, val_lbl_bbox = get_annotations(path / 'valid.json')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox
@@ -30,7 +31,8 @@ def pascal_2007(batch_size=16, imgsize=300, **kwargs):
     return data
 
 def pascal_2012(batch_size=16, imgsize=300, **kwargs):
-    path = untar_data(URLs.PASCAL_2012)
+    # path = untar_data(URLs.PASCAL_2012)
+    path = url2path(URLs.PASCAL_2012)
     train_images, train_lbl_bbox = get_annotations(path / 'train.json')
     val_images, val_lbl_bbox = get_annotations(path / 'valid.json')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox
