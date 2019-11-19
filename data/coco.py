@@ -22,15 +22,15 @@ def coco_tiny(batch_size=8, imgsize=300, **kwargs):
 
     return data
 
-def coco_2014(data_root=Path.home() / 'projects/DL/DB', batch_size=8, imgsize=300, **kwargs):
-    path = data_root / 'coco/'
+def coco_2014(batch_size=8, imgsize=300, **kwargs):
+    path = Path('/datasets/coco/')
     train_images, train_lbl_bbox = get_annotations(path / 'annotations/instances_train2014.json')
     val_images, val_lbl_bbox = get_annotations(path / 'annotations/instances_val2014.json')
     images, lbl_bbox = train_images + val_images, train_lbl_bbox + val_lbl_bbox
     img2bbox = dict(zip(images, lbl_bbox))
     get_y_func = lambda o: img2bbox[o.name]
 
-    data = (ObjectItemList.from_folder(path / '2014/')
+    data = (ObjectItemList.from_folder(path)
             .split_by_files(val_images)
             .label_from_func(get_y_func)
             .transform(get_transforms(), tfm_y=True, size=imgsize)
@@ -47,7 +47,16 @@ def coco_2017(batch_size=8, imgsize=300, **kwargs):
     img2bbox = dict(zip(images, lbl_bbox))
     get_y_func = lambda o: img2bbox[o.name]
 
-    data = (ObjectItemList.from_folder(path / '2017/',followlinks=True)
+    # import shutil
+    # target_path = Path('/datasets/coco/')
+    # for img in train_images:
+    #     shutil.copy(str(path/'train2017'/img),str(target_path / 'train'/ img))
+    # for img in val_images:
+    #     shutil.copy(str(path/'val2017'/img),str(target_path / 'valid'/ img))
+    # print("All copied")
+    # exit()
+
+    data = (ObjectItemList.from_folder(path)
             .split_by_files(val_images)
             .label_from_func(get_y_func)
             .transform(get_transforms(), tfm_y=True, size=imgsize)

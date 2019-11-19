@@ -3,6 +3,7 @@ from .cifar import *
 from .cinic import *
 from .pascal import *
 from .coco import *
+from .object365 import *
 from .caltech import *
 from .camvid import *
 from .cat_dog import *
