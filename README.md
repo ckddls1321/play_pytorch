@@ -11,3 +11,5 @@ Pytorch Trial with Paper, Kaggle, Computer Vision Applications
 - [brevitas] (https://github.com/Xilinx/brevitas)
 - [mmcv] (https://github.com/open-mmlab/mmcv) 
 - [imgclsmob - pytorchcv] (https://github.com/osmr/imgclsmob/tree/master/pytorch) 
+- [pytorch-cifar] (https://github.com/kuangliu/pytorch-cifar) => modified and integrated forked version of imgclsmob
+
