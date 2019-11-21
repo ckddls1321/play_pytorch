@@ -16,16 +16,7 @@ def object365(batch_size=8, imgsize=300, **kwargs):
     img2bbox = dict(zip(images, lbl_bbox))
     get_y_func = lambda o: img2bbox[o.name]
 
-    # import shutil
-    # target_path = Path('/datasets/object365')
-    # for img in train_images:
-    #     shutil.copy(str(path/'train'/img),str(target_path / 'train2'/ img))
-    # for img in val_images:
-    #     shutil.copy(str(path/'val'/img),str(target_path / 'val2'/ img))
-    # print("All copied")
-    # exit()
-
-    data = (ObjectItemList.from_folder(path,valid='val')
+    data = (ObjectItemList.from_folder(path)
             .split_by_rand_pct()
             .label_from_func(get_y_func)
             .transform(get_transforms(), tfm_y=True, size=imgsize)
