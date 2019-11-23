@@ -94,6 +94,7 @@ if __name__ == "__main__":
     # models : Darknet, resnet18,34,50,101,152,xresnet18,34,50,101,152,squeezenet1_0,squeezenet1_1, densenet121
     # learner.loss_func :
     # learner = cnn_learner(dataset, models.resnet18, wd=cfg.optimizer.weight_decay)
+    # learner = GANLearner()
     # learner = unet_learner(dataset, models.resnet34, metrics=partial(foreground_acc,void_code=30), wd=cfg.optimizer.weight_decay)
     # languagemodellearner()
     # textclassifierlearner()
