@@ -73,6 +73,7 @@ if __name__ == "__main__":
         dataset = getattr(data, cfg.dataset_type)
         dataset = dataset(batch_size=cfg.total_bs, imgsize=cfg.img_size)
         dataset.show_batch(rows=3, figsize=(10,10))
+        plt.show()
     except:
         print("Dataset Type {} are Not Implemented. ".format(cfg.dataset_type))
         exit()
@@ -113,13 +114,12 @@ if __name__ == "__main__":
     # learner.cutmix()
     # learner.ricap()
     # learner.blend()
-    learner.show_tfms()
+    # learner.show_tfms()
 
     print(cfg.text)
     # learner.lr_find(num_it=200)
     # learner.recorder.plot(suggestion=True,show_moms=False)
     # learner.sched.plot_lr(show_moms=False)
-    # plt.show()
     # exit()
 
     if cfg.lr_config.policy.lower() == 'cyclic':
