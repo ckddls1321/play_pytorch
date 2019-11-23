@@ -3,6 +3,8 @@ Pytorch Trial with Paper, Kaggle, Computer Vision Applications
 
 ## Getting Started
 
+## Results
+
 ## Demo
 
 ## Library used
