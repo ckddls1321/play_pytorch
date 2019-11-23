@@ -1,4 +1,5 @@
 from .mnist import *
+from .biwihead import *
 from .cifar import *
 from .cinic import *
 from .pascal import *

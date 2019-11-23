@@ -30,6 +30,7 @@ def parse_args():
     parser.add_argument('--dist_backend', default='nccl', help='distributed url used to set up, host process')
     parser.add_argument('--multiprocessing_distributed', default='nccl',
                         help='distributed url used to set up, host process')
+    parser.add_argument('--save', default=False, help='Save after training')
     parser.add_argument('--arch_search', default=False, help='Neural Architecture Search')
     parser.add_argument('--quantize', default=False, help='Quantization Model')
     parser.add_argument('--prune', default=False, help='pruning')
@@ -86,9 +87,17 @@ if __name__ == "__main__":
         loss = getattr(loss, cfg.loss)
     optimizer = get_optimizer(cfg.optimizer)
 
-    learner = Learner(dataset, model, opt_func=optimizer, loss_func=loss().to(device), metrics=metrics, bn_wd=False,
-                      true_wd=True, wd=cfg.optimizer.weight_decay, path=cfg.work_dir)
-    # TODO: cnn_learner
+    # learner = Learner(dataset, model, opt_func=optimizer, loss_func=loss().to(device),
+    #                   metrics=metrics, bn_wd=False, true_wd=True,
+    #                   wd=cfg.optimizer.weight_decay, path=cfg.work_dir) # Custom Learner
+
+    # models : Darknet, resnet18,34,50,101,152,xresnet18,34,50,101,152,squeezenet1_0,squeezenet1_1, densenet121
+    # learner.loss_func :
+    # learner = cnn_learner(dataset, models.resnet18, wd=cfg.optimizer.weight_decay)
+    # learner = unet_learner(dataset, models.resnet34, metrics=partial(foreground_acc,void_code=30), wd=cfg.optimizer.weight_decay)
+    # languagemodellearner()
+    # textclassifierlearner()
+    # tabular_learner()
 
     if args.local_rank > -1:
         learner.to_distributed(args.local_rank)
