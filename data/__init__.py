@@ -11,6 +11,7 @@ from .cat_dog import *
 from .imagenet import *
 from .widerface import *
 from .widerperson import *
+from .lsun import *
 from .food import *
 from .oxford import *
 from .stanford import *

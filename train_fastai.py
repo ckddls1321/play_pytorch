@@ -3,6 +3,7 @@ import json
 import argparse
 import fastai
 from fastai.vision import *
+from fastai.vision.gan import *
 from fastai.metrics import *
 from fastai.callbacks import *
 from fastai.callbacks.tensorboard import LearnerTensorboardWriter
@@ -92,13 +93,24 @@ if __name__ == "__main__":
     #                   wd=cfg.optimizer.weight_decay, path=cfg.work_dir) # Custom Learner
 
     # models : Darknet, resnet18,34,50,101,152,xresnet18,34,50,101,152,squeezenet1_0,squeezenet1_1, densenet121
-    # learner.loss_func :
+
+    # Basic CNN
     # learner = cnn_learner(dataset, models.resnet18, wd=cfg.optimizer.weight_decay)
-    # learner = GANLearner()
     # learner = unet_learner(dataset, models.resnet34, metrics=partial(foreground_acc,void_code=30), wd=cfg.optimizer.weight_decay)
+
+    # GAN
+    generator = basic_generator(in_size=64, n_channels=3, n_extra_layers=1)
+    critic = basic_critic(in_size=64, n_channels=3, n_extra_layers=1)
+    learner = GANLearner.wgan(dataset, generator, critic, switch_eval=False,opt_func=partial(optim.Adam, betas=(0., 0.99)), wd=0.)
+    learner.fit(30,2e-4)
+
+    # Fast AI NLP
     # languagemodellearner()
     # textclassifierlearner()
     # tabular_learner()
+
+
+    # learner.loss_func :
 
     if args.local_rank > -1:
         learner.to_distributed(args.local_rank)
@@ -142,6 +154,10 @@ if __name__ == "__main__":
                              warmup_ratio=cfg.lr_config.warmup_ratio)
     # if cfg.lr_config.policy.lower() == 'warm_restart':
     #     fit_warmup_restart(learner,n_cycles, cfg.optimizer.lr, cfg.optimizer.mom, cycle_len, cycle_mult)
+
+    # show results
+    learner.gan_trainer.switch(gen_mode=True)
+    learner.show_results(ds_type=DatasetType.Train, rows=16, figsize=(8, 8))
 
     # Interpretation
     # learner.to_fp32()
