@@ -88,29 +88,23 @@ if __name__ == "__main__":
         loss = getattr(loss, cfg.loss)
     optimizer = get_optimizer(cfg.optimizer)
 
-    # learner = Learner(dataset, model, opt_func=optimizer, loss_func=loss().to(device),
-    #                   metrics=metrics, bn_wd=False, true_wd=True,
-    #                   wd=cfg.optimizer.weight_decay, path=cfg.work_dir) # Custom Learner
+    learner = Learner(dataset, model, opt_func=optimizer, loss_func=loss().to(device),
+                      metrics=metrics, bn_wd=False, true_wd=True,
+                      wd=cfg.optimizer.weight_decay, path=cfg.work_dir) # Custom Learner
 
     # models : Darknet, resnet18,34,50,101,152,xresnet18,34,50,101,152,squeezenet1_0,squeezenet1_1, densenet121
-
-    # Basic CNN
     # learner = cnn_learner(dataset, models.resnet18, wd=cfg.optimizer.weight_decay)
     # learner = unet_learner(dataset, models.resnet34, metrics=partial(foreground_acc,void_code=30), wd=cfg.optimizer.weight_decay)
 
     # GAN
-    generator = basic_generator(in_size=64, n_channels=3, n_extra_layers=1)
-    critic = basic_critic(in_size=64, n_channels=3, n_extra_layers=1)
-    learner = GANLearner.wgan(dataset, generator, critic, switch_eval=False,opt_func=partial(optim.Adam, betas=(0., 0.99)), wd=0.)
-    learner.fit(30,2e-4)
+    # generator = basic_generator(in_size=64, n_channels=3, n_extra_layers=1)
+    # critic = basic_critic(in_size=64, n_channels=3, n_extra_layers=1)
+    # learner = GANLearner.wgan(dataset, generator, critic, switch_eval=False,opt_func=partial(optim.Adam, betas=(0., 0.99)), wd=0.)
 
-    # Fast AI NLP
+    # NLP
     # languagemodellearner()
     # textclassifierlearner()
     # tabular_learner()
-
-
-    # learner.loss_func :
 
     if args.local_rank > -1:
         learner.to_distributed(args.local_rank)
@@ -144,6 +138,8 @@ if __name__ == "__main__":
     # learner.sched.plot_lr(show_moms=False)
     # exit()
 
+    if cfg.lr_config.policy.lower() == 'fit':
+        learner.fit(int(cfg.total_epochs),cfg.optimizer.lr)
     if cfg.lr_config.policy.lower() == 'cyclic':
         learner.fit_one_cycle(int(cfg.total_epochs), cfg.optimizer.lr, tot_epochs=int(cfg.total_epochs),
                               div_factor=cfg.lr_config.div_factor,pct_start=cfg.lr_config.pct_start)
