@@ -15,3 +15,5 @@ from .lsun import *
 from .food import *
 from .oxford import *
 from .stanford import *
+from .cityscapes import *
+from .CrowdHuman import *
