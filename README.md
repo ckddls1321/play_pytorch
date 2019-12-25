@@ -16,4 +16,5 @@ Pytorch Trial with Paper, Kaggle, Computer Vision Applications
 - [pytorch-cifar] (https://github.com/kuangliu/pytorch-cifar) => modified and integrated forked version of imgclsmob
 - [fastai_extensions] (https://github.com/oguiza/fastai_extensions) 
 - [TorchRay] (https://github.com/facebookresearch/TorchRay.git) 
+- [FastAI V1.0 Course modified] (https://github.com/jav0927/course-v3)
 

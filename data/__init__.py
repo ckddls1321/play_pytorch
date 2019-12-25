@@ -17,3 +17,4 @@ from .oxford import *
 from .stanford import *
 from .cityscapes import *
 from .CrowdHuman import *
+from .openimages_v4 import *
