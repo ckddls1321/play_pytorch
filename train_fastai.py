@@ -1,3 +1,16 @@
+# Imports
+from icevision.all import *
+import icedata
+
+# Load the PennFudan dataset
+path = icedata.pennfudan.load_data()
+# Load the PETS dataset
+path = icedata.pets.load_data()
+# Load the Birds dataset
+path = icedata.birds.load_data()
+# Load the Fridge Objects dataset
+path = icedata.fridge.load_data()
+
 # Installing IceVision
 # !pip install icevision[all] icedata
 
