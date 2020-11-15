@@ -34,7 +34,20 @@ train_dl = faster_rcnn.train_dl(train_ds, batch_size=16, num_workers=4, shuffle=
 valid_dl = faster_rcnn.valid_dl(valid_ds, batch_size=16, num_workers=4, shuffle=False)
 
 # Create model
-model = faster_rcnn.model(num_classes=len(class_map))
+
+# Backbones
+backbone = backbones.resnet_fpn.resnet18(pretrained=True)
+# backbone = backbones.resnet_fpn.resnet34(pretrained=True)
+# backbone = backbones.resnet_fpn.resnet50(pretrained=True) # Default
+# backbone = backbones.resnet_fpn.resnet101(pretrained=True)
+# backbone = backbones.resnet_fpn.resnet152(pretrained=True)
+# backbone = backbones.resnet_fpn.resnext50_32x4d(pretrained=True)
+# backbone = backbones.resnet_fpn.resnext101_32x8d(pretrained=True)
+# backbone = backbones.resnet_fpn.wide_resnet50_2(pretrained=True)
+# backbone = backbones.resnet_fpn.wide_resnet101_2(pretrained=True)
+
+# Model
+model = faster_rcnn.model(backbone=backbone, num_classes=len(class_map))
 
 # Define metrics
 metrics = [COCOMetric(metric_type=COCOMetricType.bbox)]
